@@ -11,7 +11,7 @@ gulp.task('extras', () => {
   return gulp.src([
     'app/*.*',
     'app/_locales/**',
-    '!app/scripts.babel',
+    'app/scripts/*.js',
     '!app/*.json',
     '!app/*.html',
   ], {
@@ -28,7 +28,7 @@ function lint(files, options) {
   };
 }
 
-gulp.task('lint', lint('app/scripts.babel/**/*.js', {
+gulp.task('lint', lint('app/scripts/*.js', {
   env: {
     es6: true
   }
@@ -54,7 +54,7 @@ gulp.task('html',  () => {
   return gulp.src('app/*.html')
     .pipe($.useref({searchPath: ['.tmp', 'app', '.']}))
     .pipe($.sourcemaps.init())
-    .pipe($.if('*.js', $.uglify()))
+    .pipe($.if('app/scripts/*.js', $.uglify()))
     .pipe($.if('*.css', $.cleanCss({compatibility: '*'})))
     .pipe($.sourcemaps.write())
     .pipe($.if('*.html', $.htmlmin({removeComments: true, collapseWhitespace: true})))
@@ -80,7 +80,7 @@ gulp.task('chromeManifest', () => {
 });
 
 gulp.task('babel', () => {
-  return gulp.src('app/scripts.babel/**/*.js')
+  return gulp.src('app/scripts/*.js')
       .pipe($.babel({
         presets: ['es2015']
       }))
@@ -94,13 +94,13 @@ gulp.task('watch', ['lint', 'babel'], () => {
 
   gulp.watch([
     'app/*.html',
-    'app/scripts/**/*.js',
+    'app/scripts/*.js',
     'app/images/**/*',
     'app/styles/**/*',
     'app/_locales/**/*.json'
   ]).on('change', $.livereload.reload);
 
-  gulp.watch('app/scripts.babel/**/*.js', ['lint', 'babel']);
+  gulp.watch('app/scripts/*.js', ['lint', 'babel']);
   gulp.watch('bower.json', ['wiredep']);
 });
 
