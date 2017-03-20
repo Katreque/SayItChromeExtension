@@ -3,15 +3,22 @@
 (function () {
   'use strict';
 
-  var seLoiro = function seLoiro(evt) {
-    evt.detail.message = 'E eu sou sua mãe! FONNN!';
-    var k = new CustomEvent('PuloDoGatoDeVolta', evt);
+  var objeto = {
+    detail: {
+      message: 'E eu sou o Jô Soares!'
+    }
+  };
+
+  var callback = function callback(evt) {
+    var k = new CustomEvent('ExtensaoParaPage', objeto);
     window.dispatchEvent(k);
   };
 
-  window.addEventListener('PuloDoGato', function (evt) {
+  window.addEventListener('PageParaExtensao', function (evt) {
     return new Promise(function (res, rej) {
-      return seLoiro(evt);
+      return callback(evt);
     });
   }, false);
+
+  window.removeEventListener('PageParaExtensao', function (evt) {});
 })();
