@@ -61,6 +61,11 @@ gulp.task('html',  () => {
     .pipe(gulp.dest('dist'));
 });
 
+gulp.task('js', () =>{
+  return gulp.src('app/bower_components/**')
+          .pipe(gulp.dest('dist/bower_components'));
+})
+
 gulp.task('chromeManifest', () => {
   return gulp.src('app/manifest.json')
     .pipe($.chromeManifest({
@@ -126,7 +131,7 @@ gulp.task('package', function () {
 gulp.task('build', (cb) => {
   runSequence(
     'lint', 'babel', 'chromeManifest',
-    ['html', 'images', 'extras'],
+    ['html', 'js', 'images', 'extras'],
     'size', cb);
 });
 
