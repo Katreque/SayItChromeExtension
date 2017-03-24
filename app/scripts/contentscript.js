@@ -14,8 +14,13 @@
     window.dispatchEvent(k);
   };
 
+  var callback1 = function callback(evt) {
+    chrome.runtime.sendMessage(objeto.detail);
+  };
+
   window.addEventListener('PageParaExtensao', function (evt) {
     return new Promise(function (res, rej) {
+      callback1(evt);
       return callback(evt);
     });
   }, false);

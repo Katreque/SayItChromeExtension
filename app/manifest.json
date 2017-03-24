@@ -35,7 +35,8 @@
     "storage",
     "webNavigation",
     "webRequest",
-    "webRequestBlocking"
+    "webRequestBlocking",
+    "nativeMessaging"
   ],
   "options_ui": {
     "page": "options.html",
