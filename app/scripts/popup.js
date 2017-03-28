@@ -13,8 +13,8 @@
       localStorage.setItem('kappa', 'Churrasqueira Controle Remoto');
     });*/
 
-    //Por localStorage
-    console.log(localStorage.getItem('kappa'));
+    /*Por localStorage
+    console.log(localStorage.getItem('kappa'));*/
 
     /*Por API
       chrome.storage.local.get('value', function (res) {
